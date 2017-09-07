@@ -1,8 +1,7 @@
 
-export const selectPoint = pointId => {
-    console.log(pointId);
+export const selectMarker = markerId => {
     return {
-        "type": "SELECT_POINT",
-        "pointId": pointId
+        "type": "SELECT_MARKER",
+        "markerId": markerId
     }
 }

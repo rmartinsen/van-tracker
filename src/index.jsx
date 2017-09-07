@@ -4,22 +4,22 @@ import { createStore } from "redux";
 import { Provider, connect } from "react-redux";
 
 import VanMap from "./components/VanMap.jsx";
-import vanReducer from "./reducers/VanReducer.js";
-import { selectPoint } from "./actions/VanActions.js";
+import { vanReducer } from "./reducers/VanReducer.js";
+import { selectMarker } from "./actions/VanActions.js";
 
 let store = createStore(vanReducer);
 
 const mapStateToProps = state => {
     return {
-        points: state.points,
-        selected_point_id: state.selectedPointId
+        markers: state.markers,
+        selected_marker_id: state.selectedMarkerId
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onPointClick: pointId => {
-            dispatch(selectPoint(pointId));
+        onMarkerClick: markerId => {
+            dispatch(selectMarker(markerId));
         }
     }
 }
