@@ -2,16 +2,20 @@ import React from "react";
 import { Map, Marker, TileLayer } from "react-leaflet";
 import L from "leaflet";
 
-const stamenTonerTiles = 'http://stamen-tiles-{s}.a.ssl.fastly.net/toner-background/{z}/{x}/{y}.png';
-const stamenTonerAttr = 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
-const mapCenter = [38.5816, -121.4944];
-const zoomLevel = 5;
+import { selectPoint } from "../actions/VanActions.js";
+
+const mapUrl = "http://stamen-tiles-{s}.a.ssl.fastly.net/toner-background/{z}/{x}/{y}.png";
+const mapCenter = [53.439279, -113.618731];
+const zoomLevel = 3;
 
 export default class VanMap extends React.Component {
-    buttonClick() {
+    pointClick() {
+        this.props.onPointClick(42);
     }
 
     render() {
+        console.log(this.props);
+
         const vanIcon = L.icon({
             iconUrl: "van.png",
             iconSize: [40, 40]
@@ -22,14 +26,11 @@ export default class VanMap extends React.Component {
                 <Map center={mapCenter}
                      zoom={zoomLevel}
                      id="map-container">
-                    <TileLayer attribution={stamenTonerAttr}
-                               url={stamenTonerTiles} />
+                    <TileLayer url={mapUrl} />
                     <Marker position={mapCenter} 
-                            icon={ vanIcon }/>
+                            icon={ vanIcon }
+                            onclick={ () => this.pointClick() }/>
                 </Map>
-                <button onClick={ () => this.buttonClick() }>
-                    button
-                </button>
             </div>
         );
     }
