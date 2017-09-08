@@ -4,8 +4,8 @@ import { createStore } from "redux";
 import { Provider, connect } from "react-redux";
 
 import VanMap from "./components/VanMap.jsx";
-import { vanReducer } from "./reducers/VanReducer.js";
-import { selectMarker } from "./actions/VanActions.js";
+import vanReducer from "./reducers/VanReducer.js";
+import { addMarker, selectMarker } from "./actions/VanActions.js";
 
 let store = createStore(vanReducer);
 
@@ -20,10 +20,12 @@ const mapDispatchToProps = dispatch => {
     return {
         onMarkerClick: markerId => {
             dispatch(selectMarker(markerId));
+        },
+        addMarker: marker => {
+            dispatch(addMarker(marker));
         }
     }
 }
-
 
 let VanMapConnected = connect(
     mapStateToProps,

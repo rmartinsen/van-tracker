@@ -5,3 +5,10 @@ export const selectMarker = markerId => {
         "markerId": markerId
     }
 }
+
+export const addMarker = marker => {
+    return {
+        "type": "ADD_MARKER",
+        "marker": marker
+    }
+}

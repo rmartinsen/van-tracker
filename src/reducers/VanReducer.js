@@ -1,18 +1,10 @@
 
 const initialState = {
-    markers: [
-        {
-            markerId: 42,
-            title: "Test Marker",
-            description: "This place was the shit",
-            latitude: 53.439279,
-            longitude: -113.618731,
-        }
-    ],
+    markers: [],
     selectedMarkerId: 1,
 }
 
-let vanReducer = (state = [], action) => {
+let vanReducer = (state, action) => {
     if(state === undefined) {
         return initialState;
     }
@@ -22,10 +14,17 @@ let vanReducer = (state = [], action) => {
     switch(action.type) {
         case "SELECT_MARKER":
             const selectedMarker = action.markerId; 
-            newState = Object.assign({}, state, {selectedMarkerId: selectedMarker})
+            newState = Object.assign({}, state, {selectedMarkerId: selectedMarker});
+            break;
+        case "ADD_MARKER":
+            newState = {
+                ...state,
+                markers: [state.markers, action.marker]
+            }
+            break;
     }
-
-    return newState;
+    
+    return newState;    
 }
 
 export default vanReducer;
