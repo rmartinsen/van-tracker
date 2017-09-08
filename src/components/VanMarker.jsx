@@ -1,15 +1,19 @@
 
-import { Component } from "react";
+import React from "react";
 import { Marker } from "react-leaflet";
 import L from "leaflet";
 
-export default class VanMarker extends Component {
+export default class VanMarker extends React.Component {
 
     selectMarker(markerId) {
-        this.props.selectMarker(markerId);
+        console.log(markerId);
     }
 
     render() {
+        if(!this.props || !this.props.latlong) {
+            return null;
+        }
+
         const markerId = this.props.markerId;
 
         const vanIcon = L.icon({
@@ -20,8 +24,8 @@ export default class VanMarker extends Component {
         return (
             <div>
                 <Marker position={ this.props.latlong } 
-                icon={ vanIcon }
-                onclick={ () => this.selectMarker(markerId) }/>
+                        icon={ vanIcon }
+                        onclick={ () => this.selectMarker(markerId) }/>
             </div>
         )
     }

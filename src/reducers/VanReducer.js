@@ -19,11 +19,10 @@ let vanReducer = (state, action) => {
         case "ADD_MARKER":
             newState = {
                 ...state,
-                markers: [state.markers, action.marker]
+                markers: state.markers.concat(action.marker)
             }
             break;
     }
-    
     return newState;    
 }
 

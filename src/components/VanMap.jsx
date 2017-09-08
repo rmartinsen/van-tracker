@@ -1,6 +1,6 @@
 import React from "react";
 import { Map, TileLayer } from "react-leaflet";
-import { VanMarker } from "./VanMarker.jsx";
+import VanMarker from "./VanMarker.jsx";
 
 const mapUrl = "http://stamen-tiles-{s}.a.ssl.fastly.net/toner-background/{z}/{x}/{y}.png";
 const mapCenter = [53.439279, -113.618731];
@@ -29,20 +29,21 @@ export default class VanMap extends React.Component {
         }
 
         const markers = this.props.markers.map( (data) => {
-            return <VanMarker markerId = { data.markerId }
-                           latlong = { [data.latitude, data.longitude ] }
+            return <VanMarker key={ "van_marker_" + data.markerId }
+                              markerId={ data.markerId }
+                              latlong={ [data.latitude, data.longitude ] }
                            />
         })
-        if (markers.length > 1) {
-            debugger;
-        }
+        
         return (
             <div>
                 <Map center={mapCenter}
                      zoom={zoomLevel}
                      id="map-container">
                     <TileLayer url={mapUrl} />
+                    { markers }
                 </Map>
+                
             </div>
         );
     }
