@@ -1,18 +1,16 @@
 
-import { Component } from "react";
+import React from "react";
 
-export default class Blurb extends Component {
+export default class Blurb extends React.Component {
     render() {
         if (!this.props) {
             return <div></div>
         }
 
-        const blurb = this.props.blurb;
-
         return (
             <div>
-                <h2>{ blurb.title }</h2>
-                <p>{ blurb.description }</p>
+                <h2>{ this.props.title }</h2>
+                <p>{ this.props.description }</p>
             </div>
         )
     }
