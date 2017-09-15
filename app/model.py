@@ -1,11 +1,11 @@
 import sqlalchemy as db
-from sqlalchemy.orm import (scoped_session, sessionmaker)
+from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
 from instance.config import settings
 
 engine = db.create_engine(settings["SQLALCHEMY_DATABASE_URI"])
-sm = sessionmaker(bind=engine, autocommit=True)
+sm = sessionmaker(bind=engine)
 db_session = scoped_session(sm)
 
 Base = declarative_base()
@@ -22,4 +22,4 @@ class Marker(Base):
     blurb = db.Column(db.String(65535))
 
     def __repr__(self):
-        return "<Marker %d>".format(self.marker_id)
+        return "<Marker %d: %s>".format([self.marker_id, self.title])
